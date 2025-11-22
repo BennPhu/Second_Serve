@@ -12,11 +12,7 @@ struct Dashboard: View {
                 
                 ScrollView {
                     VStack(spacing: 20) {
-                        TextField("Search", text: $searchFood)
-                            .textFieldStyle(.roundedBorder)
-                            .padding(.horizontal)
-                            .frame(width: 360, height: 47)
-
+                        // top banner
                         Image("PearBanner")
                             .resizable()
                             .scaledToFill()
@@ -29,10 +25,10 @@ struct Dashboard: View {
                     // Objects in feed, 1st section
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing: 20) {
-                            CardView(title: "Banana", backgroundColor: Color.gray.gradient).frame(width: 180, height: 200)
-                            CardView(title: "Orange", backgroundColor: Color.gray.gradient).frame(width: 160, height: 200)
-                            CardView(title: "Yogurt", backgroundColor: Color.gray.gradient).frame(width: 160, height: 200)
-                            CardView(title: "Milk", backgroundColor: Color.gray.gradient).frame(width: 160, height: 200)
+                            CardView(title: "Banana", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
+                            CardView(title: "Orange", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
+                            CardView(title: "Yogurt", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
+                            CardView(title: "Milk", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
                         }
                         .padding(.leading, 20)
                         .padding(.trailing, 10)
@@ -42,10 +38,10 @@ struct Dashboard: View {
                     // Objects in feed, 2nd section
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing: 20) {
-                            CardView(title: "Pizza", backgroundColor: Color.gray.gradient).frame(width: 180, height: 200)
-                            CardView(title: "Chicken", backgroundColor: Color.gray.gradient).frame(width: 160, height: 200)
-                            CardView(title: "Pear", backgroundColor: Color.gray.gradient).frame(width: 160, height: 200)
-                            CardView(title: "Taco", backgroundColor: Color.gray.gradient).frame(width: 160, height: 200)
+                            CardView(title: "Pizza", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
+                            CardView(title: "Chicken", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
+                            CardView(title: "Pear", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
+                            CardView(title: "Taco", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
                         }
                         .padding(.leading, 20)
                         .padding(.trailing, 10)
@@ -57,8 +53,13 @@ struct Dashboard: View {
                 VStack {
                     Spacer()
                     
-                    HStack {
-                        Spacer()
+                    HStack(spacing: 12) {
+                        
+                        
+                        TextField("Search", text: $searchFood)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.leading, 20)
+                            .frame(height: 50).offset(x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/-10.0/*@END_MENU_TOKEN@*/)
                         
                         Button(action: { // if pressed
                             showCart = true
@@ -73,6 +74,7 @@ struct Dashboard: View {
                         }
                         .padding(.bottom, 30)
                         .padding(.trailing, 20)
+                        
                     }
                 }
             }
