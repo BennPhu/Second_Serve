@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "foodBanana.jpeg",
+      "filename" : "20251121_180050.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "20251121_180211.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "20251121_180322.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }
