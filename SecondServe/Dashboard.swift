@@ -7,11 +7,11 @@ struct Dashboard: View {
     var body: some View {
         TabView {
             
-            // home tab
             ZStack {
-                
+                // MAIN SCROLL FEED
                 ScrollView {
                     VStack(spacing: 20) {
+                        
                         // top banner
                         Image("PearBanner")
                             .resizable()
@@ -19,49 +19,56 @@ struct Dashboard: View {
                             .frame(width: 330, height: 100)
                             .clipped()
                             .cornerRadius(12)
-                    }
-                    .padding(.top, 24)
-                    
-                    // Objects in feed, 1st section
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing: 20) {
-                            CardView(title: "Banana", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
-                            CardView(title: "Orange", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
-                            CardView(title: "Yogurt", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
-                            CardView(title: "Milk", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
+                            .padding(.top, 24)
+                        
+                        // feed sections
+                        // remember: change 1...10 corresponding to however many items we have
+                        ForEach(1...10, id: \.self) { _ in
+                            Divider()
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 20) {
+                                    CardView(title: "Banana", backgroundColor: Color.gray.gradient)
+                                        .frame(width: 170, height: 200)
+                                    CardView(title: "Orange", backgroundColor: Color.gray.gradient)
+                                        .frame(width: 185, height: 200)
+                                    CardView(title: "Yogurt", backgroundColor: Color.gray.gradient)
+                                        .frame(width: 185, height: 200)
+                                    CardView(title: "Milk", backgroundColor: Color.gray.gradient)
+                                        .frame(width: 185, height: 200)
+                                }
+                                .padding(.leading, 20)
+                                .padding(.trailing, 10)
+                            }
+                            .frame(height: 115)
+                            
                         }
-                        .padding(.leading, 20)
-                        .padding(.trailing, 10)
+                        
+                        Text("You've reached the end!")
+                            .multilineTextAlignment(.center)
+                            .font(.caption)
+                            .padding(.top, 12)
                     }
-                    .frame(height: 220)
-                    
-                    // Objects in feed, 2nd section
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing: 20) {
-                            CardView(title: "Pizza", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
-                            CardView(title: "Chicken", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
-                            CardView(title: "Pear", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
-                            CardView(title: "Taco", backgroundColor: Color.gray.gradient).frame(width: 185, height: 200)
-                        }
-                        .padding(.leading, 20)
-                        .padding(.trailing, 10)
-                    }
-                    .frame(height: 220)
                 }
                 
-                // bottom right cart button
+                // search bar alongside car
                 VStack {
                     Spacer()
                     
                     HStack(spacing: 12) {
-                        
-                        
+                        //search nar
                         TextField("Search", text: $searchFood)
-                            .textFieldStyle(.roundedBorder)
+                            .padding(.horizontal, 12)
+                            .frame(height: 50)
+                            .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.black.opacity(0.85))
+                            )
+                            .foregroundColor(.white)
+                            .foregroundStyle(.white.opacity(0.9))
                             .padding(.leading, 20)
-                            .frame(height: 50).offset(x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/-10.0/*@END_MENU_TOKEN@*/)
-                        
-                        Button(action: { // if pressed
+
+                        //cart on n off
+                        Button(action: {
                             showCart = true
                         }) {
                             Image(systemName: "cart.fill")
@@ -72,13 +79,12 @@ struct Dashboard: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 4)
                         }
-                        .padding(.bottom, 30)
                         .padding(.trailing, 20)
-                        
                     }
+                    .padding(.bottom, 30)
                 }
             }
-            .sheet(isPresented: $showCart) { // opens up sheet with order details
+            .sheet(isPresented: $showCart) {
                 VStack(spacing: 20) {
                     Text("Your Order")
                         .font(.title)
@@ -94,19 +100,17 @@ struct Dashboard: View {
                 }
                 .padding()
             }
-            .tabItem {  // home tab (leave it like this)
+            .tabItem {
                 Image(systemName: "house.fill")
                 Text("Home")
             }
             
             
-            // sell tab
             Text("Sell").tabItem {
                 Image(systemName: "plus")
                 Text("Sell")
             }
-
-            // profile tab
+            
             Text("Profile").tabItem {
                 Image(systemName: "person.fill")
                 Text("Profile")
@@ -115,16 +119,16 @@ struct Dashboard: View {
     }
 }
 
-// Function that displays items in a Card View template
 struct CardView: View {
     let title: String
     let backgroundColor: AnyGradient
     
     var body: some View {
-        VStack{
-            Text(title).font(.system(size: 30))
+        VStack {
+            Text(title)
+                .font(.system(size: 30))
         }
-        .frame(width: 150.0, height: 100.0)
+        .frame(width: 185, height: 100)
         .background(backgroundColor)
         .clipShape(RoundedRectangle(cornerRadius: 25))
     }
